@@ -22,8 +22,10 @@ export default {
 </script>
 
 <template>
-  <div class="movies">
-    <h1>{{ movies }}</h1>
+  <div v-for="movie in movies" :key="movie.id" class="movies">
+    <img v-bind:src="movie.poster_path" alt="" />
+    <h1>{{ movie.title }}</h1>
+    <p>{{ movie.vote_average }}</p>
   </div>
 </template>
 
