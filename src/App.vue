@@ -4,7 +4,9 @@
     |
     <router-link to="/movies">Movies</router-link>
     |
-    <router-link to="/users">Sign Up</router-link>
+    <router-link to="/signup">Sign Up</router-link>
+    |
+    <router-link to="/login">Log In</router-link>
   </nav>
   <router-view />
 </template>

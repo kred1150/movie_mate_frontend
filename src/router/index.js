@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import MoviesIndex from "../views/MoviesView.vue";
-import UserCreate from "../views/SignUpView.vue";
+import SignUpView from "../views/SignUpView.vue";
+import LoginView from "../views/LoginView.vue";
 
 const routes = [
   {
@@ -23,9 +24,14 @@ const routes = [
     component: MoviesIndex,
   },
   {
-    path: "/users",
+    path: "/signup",
     name: "users-create",
-    component: UserCreate,
+    component: SignUpView,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
 ];
 
