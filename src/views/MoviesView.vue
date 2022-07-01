@@ -5,6 +5,7 @@ export default {
   data: function () {
     return {
       movies: [],
+      current_movie: {},
     };
   },
   created: function () {
@@ -17,6 +18,10 @@ export default {
         this.movies = response.data;
       });
     },
+    showMoreInfo: function (movie) {
+      this.current_movie = movie;
+      this.$router.push("/movies/" + this.current_movie.id);
+    },
   },
 };
 </script>
@@ -24,9 +29,9 @@ export default {
 <template>
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col" v-for="movie in movies" :key="movie.id">
-      <img v-bind:src="movie.poster_path" class="card-img-top" alt="..." />
+      <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
       <div class="card-body">
-        <h5 class="card-title">{{ movie.title }}</h5>
+        <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
         <p class="card-text">Average Viewer Score: {{ movie.vote_average }}</p>
       </div>
     </div>
