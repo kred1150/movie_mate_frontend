@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" v-for="movie in movies" :key="movie.id">
       <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
       <div class="card-body">
@@ -44,4 +44,9 @@ export default {
   </div> -->
 </template>
 
-<style></style>
+<style>
+img {
+  max-height: 50rem;
+  max-width: 20rem;
+}
+</style>
