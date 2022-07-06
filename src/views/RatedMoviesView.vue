@@ -22,6 +22,15 @@ export default {
       this.current_movie = movie;
       this.$router.push("/movies/" + this.current_movie.id);
     },
+    // indexCleanRatedMovies: function () {
+    //   var index = 0;
+    //   while (index < this.ratings.length) {
+    //     var movie = {};
+    //     movie["rating_id"] = this.ratings[index]["rating"]["id"];
+    //     this.rated_movies.push(movie);
+    //   }
+    //   console.log("Rated Movies", this.rated_movies);
+    // },
   },
 };
 </script>
