@@ -5,8 +5,8 @@ export default {
     return {
       movie: {},
       newScoreParams: {
-        //   // user_id: this.current_user.id,
-        //   movie_id: this.movie.id,
+        // user_id: this.current_user["id"],
+        // movie_id: this.movie["id"],
         rating: " ",
         message: " ",
       },
@@ -24,6 +24,9 @@ export default {
     },
     scoreMovie: function (movie) {
       console.log(movie, "You scored this movie:", this.newScoreParams.rating);
+      axios.post("/rated_movies", this.newScoreParams).then((response) => {
+        console.log(response, "Movie Rated!");
+      });
       this.$router.push("/movies");
     },
   },
@@ -54,7 +57,7 @@ export default {
           <input v-model="newScoreParams.rating" type="text" />
         </div>
         <div class="modal-body">
-          Your Rating:
+          Your Review:
           <input v-model="newScoreParams.message" type="text" />
         </div>
         <div class="modal-footer">
