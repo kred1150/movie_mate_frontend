@@ -36,9 +36,12 @@ export default {
 </script>
 
 <template>
-  <h3>{{ rated_movies }}</h3>
-  <div v-for="movie in rated_movies" v-bind:key="movie.id">
-    <p>{{ movie.title }}</p>
+  <div class="ratings" v-for="movie in rated_movies" v-bind:key="movie.id">
+    <img :src="movie['movie']['poster_path']" alt="" />
+    <h2>{{ movie["movie"]["title"] }}</h2>
+
+    <h5>Your Score: {{ movie["rating"]["rating"] }}</h5>
+    <h5>Your Review: {{ movie["rating"]["message"] }}</h5>
   </div>
 </template>
 
