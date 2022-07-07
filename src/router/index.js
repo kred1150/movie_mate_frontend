@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import MoviesIndex from "../views/MoviesView.vue";
 import SignUpView from "../views/SignUpView.vue";
 import LoginView from "../views/LoginView.vue";
@@ -7,11 +6,6 @@ import MoviesShow from "../views/MoviesShow.vue";
 import RatedMoviesIndex from "../views/RatedMoviesView.vue";
 
 const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
   {
     path: "/about",
     name: "about",
@@ -39,6 +33,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginView,
+  },
+  {
+    path: "/",
+    name: "home",
+    component: RatedMoviesIndex,
   },
   {
     path: "/rated_movies",

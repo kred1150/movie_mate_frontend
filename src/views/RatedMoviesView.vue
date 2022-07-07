@@ -20,28 +20,23 @@ export default {
     },
     showMoreInfo: function (movie) {
       this.current_movie = movie;
-      this.$router.push("/movies/" + this.current_movie.id);
+      console.log("Movie ID:", movie);
+      this.$router.push("/movies/" + movie["movie"]["external_id"]);
     },
-    // indexCleanRatedMovies: function () {
-    //   var index = 0;
-    //   while (index < this.ratings.length) {
-    //     var movie = {};
-    //     movie["rating_id"] = this.ratings[index]["rating"]["id"];
-    //     this.rated_movies.push(movie);
-    //   }
-    //   console.log("Rated Movies", this.rated_movies);
-    // },
   },
 };
 </script>
 
 <template>
-  <div class="ratings" v-for="movie in rated_movies" v-bind:key="movie.id">
-    <img :src="movie['movie']['poster_path']" alt="" />
-    <h2>{{ movie["movie"]["title"] }}</h2>
-
-    <h5>{{ movie["user"]["username"] }}'s Score: {{ movie["rating"]["rating"] }}</h5>
-    <h5>{{ movie["user"]["username"] }}'s Review: {{ movie["rating"]["message"] }}</h5>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" v-for="movie in rated_movies" :key="movie.id">
+      <img v-bind:src="movie['movie']['poster_path']" class="card-img-top" v-on:click="showMoreInfo(movie)" />
+      <div class="card-body">
+        <h5 class="card-title">{{ movie["movie"]["title"] }}</h5>
+        <p class="card-text">{{ movie["user"]["username"] }}'s Score: {{ movie["rating"]["rating"] }}</p>
+        <p class="card-text">{{ movie["user"]["username"] }}'s Review: {{ movie["rating"]["message"] }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
