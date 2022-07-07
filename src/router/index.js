@@ -4,6 +4,7 @@ import SignUpView from "../views/SignUpView.vue";
 import LoginView from "../views/LoginView.vue";
 import MoviesShow from "../views/MoviesShow.vue";
 import RatedMoviesIndex from "../views/RatedMoviesView.vue";
+import LogoutView from "../views/LogoutView.vue";
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: "/rated_movies",
     name: "rated_movies-index",
     component: RatedMoviesIndex,
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: LogoutView,
   },
 ];
 
