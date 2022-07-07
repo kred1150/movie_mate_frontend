@@ -40,8 +40,8 @@ export default {
     <img :src="movie['movie']['poster_path']" alt="" />
     <h2>{{ movie["movie"]["title"] }}</h2>
 
-    <h5>Your Score: {{ movie["rating"]["rating"] }}</h5>
-    <h5>Your Review: {{ movie["rating"]["message"] }}</h5>
+    <h5>{{ movie["user"]["username"] }}'s Score: {{ movie["rating"]["rating"] }}</h5>
+    <h5>{{ movie["user"]["username"] }}'s Review: {{ movie["rating"]["message"] }}</h5>
   </div>
 </template>
 

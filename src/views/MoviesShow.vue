@@ -5,10 +5,10 @@ export default {
     return {
       movie: {},
       newScoreParams: {
-        // user_id: this.current_user["id"],
-        // movie_id: this.movie["id"],
-        rating: " ",
-        message: " ",
+        user_id: "",
+        movie_id: "",
+        rating: "",
+        message: "",
       },
     };
   },
@@ -23,11 +23,13 @@ export default {
       });
     },
     scoreMovie: function (movie) {
+      this.newScoreParams.movie_id = movie.id;
       console.log(movie, "You scored this movie:", this.newScoreParams.rating);
       axios.post("/rated_movies", this.newScoreParams).then((response) => {
         console.log(response, "Movie Rated!");
+        localStorage.setItem("flashMessage", "Thank you for Rating!");
+        this.$router.push("/movies");
       });
-      this.$router.push("/movies");
     },
   },
 };
