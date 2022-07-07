@@ -10,6 +10,10 @@ export default {
         rating: "",
         message: "",
       },
+      stream: {
+        flatrate: [],
+      },
+      streaming: false,
     };
   },
   created: function () {
@@ -19,7 +23,9 @@ export default {
     showMovie: function () {
       axios.get("/movies/" + this.$route.params.id).then((response) => {
         console.log("Show Movie", response);
-        this.movie = response.data;
+        this.movie = response.data["movie"];
+        this.stream = response.data["stream"];
+        this.isMovieStreaming();
       });
     },
     scoreMovie: function (movie) {
@@ -30,6 +36,11 @@ export default {
         localStorage.setItem("flashMessage", "Thank you for Rating!");
         this.$router.push("/movies");
       });
+    },
+    isMovieStreaming: function () {
+      if (this.stream && this.stream["flatrate"] && this.stream["flatrate"].length > 0) {
+        this.streaming = true;
+      }
     },
   },
 };
@@ -46,6 +57,13 @@ export default {
     Rate {{ movie.title }}
   </button>
 
+  <div v-if="streaming === true">
+    <p>Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}</p>
+  </div>
+  <div v-if="streaming === false">
+    <p>Unfortunately {{ movie.title }} is not currently streamable.</p>
+  </div>
+  <!-- "https://image.tmdb.org/t/p/w1280/" -->
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
