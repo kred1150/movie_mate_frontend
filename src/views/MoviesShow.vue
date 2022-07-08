@@ -77,6 +77,9 @@ export default {
   <div v-if="trailers.length > 0">
     <div v-for="trailer in trailers" v-bind:key="trailer.id">
       <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
+      <video :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
+        <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
+      </video>
     </div>
   </div>
   <h3>{{ movie.title }}</h3>
