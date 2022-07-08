@@ -27,12 +27,14 @@ export default {
 </script>
 
 <template>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" v-for="movie in movies" :key="movie.id">
-      <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
-      <div class="card-body">
-        <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
-        <p class="card-text">Average Viewer Score: {{ movie.vote_average }}</p>
+  <div class="movie-cards">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" v-for="movie in movies" :key="movie.id">
+        <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
+        <div class="card-body">
+          <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
+          <p class="card-text">Average Viewer Score: {{ movie.vote_average }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -48,5 +50,16 @@ export default {
 img {
   max-height: 50rem;
   max-width: 20rem;
+}
+.movie-cards h5 {
+  text-align: center;
+}
+.movie-cards p {
+  text-align: center;
+}
+
+.card-body {
+  border: 3px;
+  border-color: blue;
 }
 </style>

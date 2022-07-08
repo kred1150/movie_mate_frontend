@@ -14,10 +14,16 @@ export default {
         flatrate: [],
       },
       streaming: false,
+      cast: {},
     };
   },
   created: function () {
     this.showMovie();
+  },
+  computed: {
+    topBilledCast: function () {
+      return this.cast.slice(0, 10);
+    },
   },
   methods: {
     showMovie: function () {
@@ -25,6 +31,7 @@ export default {
         console.log("Show Movie", response);
         this.movie = response.data["movie"];
         this.stream = response.data["stream"];
+        this.cast = response.data["cast"];
         this.isMovieStreaming();
       });
     },
@@ -57,11 +64,16 @@ export default {
     Rate {{ movie.title }}
   </button>
 
-  <div v-if="streaming === true">
+  <div class="stream" v-if="streaming === true">
     <p>Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}</p>
   </div>
   <div v-if="streaming === false">
     <p>Unfortunately {{ movie.title }} is not currently streamable.</p>
+  </div>
+
+  <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
+    <h4>{{ actor["character"] }}</h4>
+    <h5>{{ actor["name"] }}</h5>
   </div>
   <!-- "https://image.tmdb.org/t/p/w1280/" -->
   <!-- Modal -->
