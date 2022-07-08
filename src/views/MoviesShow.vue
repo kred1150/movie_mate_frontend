@@ -14,7 +14,7 @@ export default {
         flatrate: [],
       },
       streaming: false,
-      cast: {},
+      cast: [],
     };
   },
   created: function () {
@@ -65,17 +65,20 @@ export default {
   </button>
 
   <div class="stream" v-if="streaming === true">
-    <p>Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}</p>
+    <p>
+      Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}
+      <img :src="`https://image.tmdb.org/t/p/w1280${stream.flatrate[0].logo_path}`" alt="" />
+    </p>
   </div>
   <div v-if="streaming === false">
     <p>Unfortunately {{ movie.title }} is not currently streamable.</p>
   </div>
 
   <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
+    <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
     <h4>{{ actor["character"] }}</h4>
     <h5>{{ actor["name"] }}</h5>
   </div>
-  <!-- "https://image.tmdb.org/t/p/w1280/" -->
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -108,5 +111,9 @@ export default {
   width: 20rem;
   border: black;
   border-width: 3rem;
+}
+.stream img {
+  max-height: 2rem;
+  max-width: 2rem;
 }
 </style>
