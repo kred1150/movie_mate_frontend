@@ -15,6 +15,8 @@ export default {
       },
       streaming: false,
       cast: [],
+      videos: [],
+      trailers: [],
     };
   },
   created: function () {
@@ -32,7 +34,9 @@ export default {
         this.movie = response.data["movie"];
         this.stream = response.data["stream"];
         this.cast = response.data["cast"];
+        this.videos = response.data["videos"];
         this.isMovieStreaming();
+        this.getTrailers();
       });
     },
     scoreMovie: function (movie) {
@@ -49,13 +53,32 @@ export default {
         this.streaming = true;
       }
     },
+    getTrailers: function () {
+      var videos = this.videos;
+      var trailers = [];
+      var index = 0;
+      while (index < videos.length) {
+        var type = videos[index].type;
+        if (type === "Trailer") {
+          trailers.push(videos[index]);
+        }
+        index = index + 1;
+      }
+      console.log("Filtered Trailers:", trailers, trailers[0].key);
+      this.trailers = trailers;
+    },
   },
 };
 </script>
 
 <template>
   <img class="show_poster" :src="movie.poster_path" alt="" />
-
+  <!-- <a :href="`https://www.themoviedb.org/video/play?key=${trailers[0].key}`"></a> -->
+  <div v-if="trailers.length > 0">
+    <div v-for="trailer in trailers" v-bind:key="trailer.id">
+      <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
+    </div>
+  </div>
   <h3>{{ movie.title }}</h3>
   <h5>Viewer Score: {{ movie.vote_average }} Release Date: {{ movie.release_date }}</h5>
   <p>{{ movie.overview }}</p>
@@ -63,6 +86,8 @@ export default {
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Rate {{ movie.title }}
   </button>
+
+  <button v-on:click="getTrailers">show trailer links</button>
 
   <div class="stream" v-if="streaming === true">
     <p>
