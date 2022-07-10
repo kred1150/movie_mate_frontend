@@ -13,11 +13,15 @@ export default {
   },
   methods: {
     showUser: function () {
-      axios.get("/users/" + this.$route.params.id).then((response) => {
-        console.log("users Rated Movies", response);
-        this.user = response.data.user;
-        this.rated_movies = response.data.ratings;
-      });
+      if (this.$route.params.id === localStorage.getItem("user_id")) {
+        this.$router.push("/profile");
+      } else {
+        axios.get("/users/" + this.$route.params.id).then((response) => {
+          console.log("users Rated Movies", response);
+          this.user = response.data.user;
+          this.rated_movies = response.data.ratings;
+        });
+      }
     },
   },
 };
