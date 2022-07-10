@@ -6,6 +6,7 @@ export default {
     return {
       movies: [],
       current_movie: {},
+      titleFilter: "",
     };
   },
   created: function () {
@@ -22,14 +23,24 @@ export default {
       this.current_movie = movie;
       this.$router.push("/movies/" + this.current_movie.id);
     },
+    filteredMovies: function () {
+      return this.movies.filter((movie) => {
+        return movie.title.toLowerCase().includes(this.titleFilter.toLowerCase());
+      });
+    },
   },
 };
 </script>
 
 <template>
+  <div class="mb-2">
+    Search for a Movie:
+    <input v-model="titleFilter" type="text" />
+  </div>
+
   <div class="movie-cards">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col" v-for="movie in movies" :key="movie.id">
+      <div class="col" v-for="movie in filteredMovies()" :key="movie.id">
         <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
         <div class="card-body">
           <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>

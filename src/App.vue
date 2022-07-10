@@ -4,6 +4,7 @@ export default {
     return {
       isLoggedIn: false,
       flashMessage: null,
+      searchText: "",
     };
   },
   watch: {
@@ -17,6 +18,11 @@ export default {
     resetFlash: function () {
       localStorage.removeItem("flashMessage");
       this.flashMessage = "";
+    },
+    searchBar: function () {
+      this.$router.push({
+        searchText: this.searchText,
+      });
     },
   },
 };
@@ -73,8 +79,14 @@ export default {
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input
+            v-model="searchText"
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button v-on:click="searchBar()" class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </div>
