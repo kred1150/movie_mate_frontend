@@ -28,25 +28,35 @@ export default {
         return movie.title.toLowerCase().includes(this.titleFilter.toLowerCase());
       });
     },
+    sortedMovies: function () {
+      return this.movies.sort((a, b) => (a.last_nom > b.last_nom ? 1 : b.last_nom > a.last_nom ? -1 : 0));
+    },
   },
 };
 </script>
 
 <template>
-  <div class="mb-2">
+  <div class="search_bar">
     Search for a Movie:
-    <input v-model="titleFilter" type="text" />
+    <input v-model="titleFilter" type="text" list="titles" />
+    <datalist id="titles">
+      <option v-for="movie in sortedMovies()" v-bind:key="movie.id">
+        {{ movie.title }}
+      </option>
+    </datalist>
   </div>
 
   <div class="movie-cards">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col" v-for="movie in filteredMovies()" :key="movie.id">
-        <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
-        <div class="card-body">
-          <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
-          <p class="card-text">Average Viewer Score: {{ movie.vote_average }}</p>
+      <TransitionGroup name="list">
+        <div class="col" v-for="movie in filteredMovies()" :key="movie.id">
+          <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
+          <div class="card-body">
+            <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
+            <p class="card-text">Average Viewer Score: {{ movie.vote_average }}</p>
+          </div>
         </div>
-      </div>
+      </TransitionGroup>
     </div>
   </div>
 
@@ -72,5 +82,18 @@ img {
 .card-body {
   border: 3px;
   border-color: blue;
+}
+.search_bar {
+  margin: 2rem;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.2s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>

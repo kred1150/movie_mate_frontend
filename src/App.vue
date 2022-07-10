@@ -101,6 +101,7 @@ export default {
 
 <style>
 nav {
+  position: fixed;
   padding: 5rem;
   margin: 1rem;
 }
