@@ -23,6 +23,11 @@ export default {
       console.log("Movie ID:", movie);
       this.$router.push("/movies/" + movie["movie"]["external_id"]);
     },
+    showUser: function (movie) {
+      this.current_movie = movie;
+      console.log("Movie ID:", movie);
+      this.$router.push("/users/" + movie["user"]["user_id"]);
+    },
   },
 };
 </script>
@@ -33,8 +38,12 @@ export default {
       <img v-bind:src="movie['movie']['poster_path']" class="card-img-top" v-on:click="showMoreInfo(movie)" />
       <div class="card-body">
         <h5 class="card-title">{{ movie["movie"]["title"] }}</h5>
-        <p class="card-text">{{ movie["user"]["username"] }}'s Score: {{ movie["rating"]["rating"] }}</p>
-        <p class="card-text">{{ movie["user"]["username"] }}'s Review: {{ movie["rating"]["message"] }}</p>
+        <p class="card-text" v-on:click="showUser(movie)">
+          {{ movie["user"]["username"] }}'s Score: {{ movie["rating"]["rating"] }}
+        </p>
+        <p class="card-text" v-on:click="showUser(movie)">
+          {{ movie["user"]["username"] }}'s Review: {{ movie["rating"]["message"] }}
+        </p>
       </div>
     </div>
   </div>
