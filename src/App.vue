@@ -1,3 +1,19 @@
+<script>
+export default {
+  data: function () {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  watch: {
+    $route: function () {
+      console.log("Route has changed!");
+      this.isLoggedIn = localStorage.jwt;
+    },
+  },
+};
+</script>
+
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
@@ -41,9 +57,9 @@
               Your Profile
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
-              <li><a class="dropdown-item" href="/login">Log In</a></li>
-              <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+              <li v-if="!isLoggedIn"><a class="dropdown-item" href="/signup">Sign Up</a></li>
+              <li v-if="!isLoggedIn"><a class="dropdown-item" href="/login">Log In</a></li>
+              <li v-if="isLoggedIn"><a class="dropdown-item" href="/logout">Log Out</a></li>
             </ul>
           </li>
         </ul>

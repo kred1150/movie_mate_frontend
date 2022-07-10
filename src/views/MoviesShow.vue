@@ -17,6 +17,7 @@ export default {
       cast: [],
       videos: [],
       trailers: [],
+      similar_movies: [],
     };
   },
   created: function () {
@@ -35,6 +36,7 @@ export default {
         this.stream = response.data["stream"];
         this.cast = response.data["cast"];
         this.videos = response.data["videos"];
+        this.similar_movies = response.data["similar_movies"];
         this.isMovieStreaming();
         this.getTrailers();
       });
@@ -89,8 +91,6 @@ export default {
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Rate {{ movie.title }}
   </button>
-
-  <button v-on:click="getTrailers">show trailer links</button>
 
   <div class="stream" v-if="streaming === true">
     <p>
