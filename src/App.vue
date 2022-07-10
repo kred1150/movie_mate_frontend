@@ -60,6 +60,7 @@ export default {
               <li v-if="!isLoggedIn"><a class="dropdown-item" href="/signup">Sign Up</a></li>
               <li v-if="!isLoggedIn"><a class="dropdown-item" href="/login">Log In</a></li>
               <li v-if="isLoggedIn"><a class="dropdown-item" href="/logout">Log Out</a></li>
+              <li v-if="isLoggedIn"><a class="dropdown-item" href="/profile">Your Profile Page</a></li>
             </ul>
           </li>
         </ul>
