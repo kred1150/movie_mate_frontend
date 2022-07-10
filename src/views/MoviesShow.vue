@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
+      isLoggedIn: false,
       movie: {},
       newScoreParams: {
         user_id: "",
@@ -20,6 +21,7 @@ export default {
     };
   },
   created: function () {
+    this.isLoggedIn = localStorage.user_id;
     this.showMovie();
   },
   computed: {
@@ -90,7 +92,7 @@ export default {
   <h5>Viewer Score: {{ movie.vote_average }} Release Date: {{ movie.release_date }}</h5>
   <p>{{ movie.overview }}</p>
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button v-if="isLoggedIn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Rate {{ movie.title }}
   </button>
 
