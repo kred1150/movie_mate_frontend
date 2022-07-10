@@ -17,7 +17,6 @@ export default {
       cast: [],
       videos: [],
       trailers: [],
-      similar_movies: [],
     };
   },
   created: function () {
@@ -36,7 +35,6 @@ export default {
         this.stream = response.data["stream"];
         this.cast = response.data["cast"];
         this.videos = response.data["videos"];
-        this.similar_movies = response.data["similar_movies"];
         this.isMovieStreaming();
         this.getTrailers();
       });
