@@ -3,12 +3,20 @@ export default {
   data: function () {
     return {
       isLoggedIn: false,
+      flashMessage: null,
     };
   },
   watch: {
     $route: function () {
       console.log("Route has changed!");
       this.isLoggedIn = localStorage.jwt;
+      this.flashMessage = localStorage.flashMessage;
+    },
+  },
+  methods: {
+    resetFlash: function () {
+      localStorage.removeItem("flashMessage");
+      this.flashMessage = "";
     },
   },
 };
@@ -72,6 +80,9 @@ export default {
     </div>
   </nav>
   <div class="container">
+    <div v-if="flashMessage" class="alert alert-success" role="alert" v-on:click="resetFlash()">
+      {{ flashMessage }}
+    </div>
     <router-view />
   </div>
 </template>
