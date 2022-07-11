@@ -4,6 +4,9 @@ import router from "./router";
 import axios from "axios";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Darkmode from "darkmode-js";
+
+new Darkmode().showWidget();
 // import Vue from "vue";
 // import Embed from "v-video-embed";
 
