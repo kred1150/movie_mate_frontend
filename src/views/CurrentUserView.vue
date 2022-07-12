@@ -43,4 +43,27 @@ export default {
   </div>
 </template>
 
-<style></style>
+<style>
+.profile-card-body {
+  background-color: lightskyblue;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 1rem;
+  letter-spacing: 1px;
+  align-items: center;
+}
+
+.profile-card-body title {
+  margin: 0;
+  color: black;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px slategrey;
+}
+.profile-card-body text {
+  background-color: midnightblue;
+  color: dimgray;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+}
+</style>

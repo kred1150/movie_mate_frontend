@@ -71,13 +71,7 @@ export default {
   </div>
 </template>
 
-<style>
-.index {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: transparent;
-}
-
+<style scoped>
 .search_bar {
   justify-content: flex-start;
   padding: 10px;
@@ -97,28 +91,6 @@ export default {
 .search_bar:focus {
   background-color: navy;
   outline: navy;
-}
-.card {
-  box-shadow: 0 4px 5px rgba(0, 0, 128, 0.2);
-  width: 18rem;
-  display: flex;
-  margin: 1rem;
-  position: relative;
-}
-
-.card img {
-  max-width: 100%;
-  object-fit: cover;
-  display: inline-block;
-}
-
-.card-body {
-  background-color: lightskyblue;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem 1rem;
-  letter-spacing: 1px;
-  align-items: center;
 }
 
 .card-body h5 {
