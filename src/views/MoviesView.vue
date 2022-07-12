@@ -79,9 +79,11 @@ export default {
 }
 
 .search_bar {
-  display: flex;
   justify-content: flex-start;
-  position: static;
+  padding: 10px;
+  position: sticky;
+  top: 2rem;
+  z-index: 2;
 }
 
 .search_bar input {
