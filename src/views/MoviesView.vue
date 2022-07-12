@@ -31,6 +31,15 @@ export default {
     sortedMovies: function () {
       return this.movies.sort((a, b) => (a.last_nom > b.last_nom ? 1 : b.last_nom > a.last_nom ? -1 : 0));
     },
+    getRatingZone: function (score) {
+      if (score >= 7.5) {
+        return "green";
+      } else if (score >= 6.0) {
+        return "yellow";
+      } else {
+        return "red";
+      }
+    },
   },
 };
 </script>
@@ -46,43 +55,69 @@ export default {
     </datalist>
   </div>
 
-  <div class="movie-cards">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <TransitionGroup name="list">
-        <div class="col" v-for="movie in filteredMovies()" :key="movie.id">
-          <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
-          <div class="card-body">
-            <h5 class="card-title" v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
-            <p class="card-text">Average Viewer Score: {{ movie.vote_average }}</p>
-          </div>
+  <div class="index">
+    <TransitionGroup name="list">
+      <div class="card" v-for="movie in filteredMovies()" :key="movie.id">
+        <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
+        <div class="card-body">
+          <h5 v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
+          <p :class="`${getRatingZone(movie.vote_average)}`">{{ movie.vote_average }}</p>
         </div>
-      </TransitionGroup>
-    </div>
+      </div>
+    </TransitionGroup>
   </div>
-
-  <!-- <div v-for="movie in movies" :key="movie.id" class="movies">
-    <img v-bind:src="movie.poster_path" alt="" />
-    <h1>{{ movie.title }}</h1>
-    <p>{{ movie.vote_average }}</p>
-  </div> -->
 </template>
 
 <style>
-img {
-  max-height: 50rem;
-  max-width: 20rem;
+.index {
+  display: flex;
+  flex-wrap: wrap;
 }
-.movie-cards h5 {
-  text-align: center;
+.card {
+  box-shadow: 0 4px 5px rgba(0, 0, 128, 0.2);
+  width: 18rem;
+  display: flex;
+  margin: 1rem;
 }
-.movie-cards p {
-  text-align: center;
+
+.card img {
+  max-width: 100%;
+  object-fit: cover;
+  display: inline-block;
 }
 
 .card-body {
-  border: 3px;
-  border-color: blue;
+  background-color: lightskyblue;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 1rem;
+  letter-spacing: 1px;
+  align-items: center;
 }
+
+.card-body h5 {
+  margin: 0;
+  color: black;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px slategrey;
+}
+.card-body p {
+  background-color: midnightblue;
+  color: dimgray;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+}
+.card-body p.green {
+  color: lime;
+}
+.card-body p.yellow {
+  color: yellow;
+}
+.card-body p {
+  color: red;
+}
+
 .search_bar {
   margin: 2rem;
 }
