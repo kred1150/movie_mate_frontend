@@ -105,8 +105,8 @@ nav {
   padding: 5rem;
   margin: 1rem;
 }
-img {
+/* img {
   margin-left: 2rem;
   margin-right: 2rem;
-}
+} */
 </style>
