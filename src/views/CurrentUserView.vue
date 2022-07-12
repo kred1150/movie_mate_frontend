@@ -31,8 +31,8 @@ export default {
 <template>
   <h1>Your Profile Page</h1>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" v-for="movie in rated_movies" :key="movie.id">
+  <div class="index">
+    <div class="card" v-for="movie in rated_movies" :key="movie.id">
       <img v-bind:src="movie['poster_path']" class="card-img-top" v-on:click="showMoreInfo(movie)" />
       <div class="card-body">
         <h5 class="card-title">{{ movie["title"] }}</h5>

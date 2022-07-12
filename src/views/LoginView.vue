@@ -37,15 +37,15 @@ export default {
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
-      <div>
-        <label>Username:</label>
-        <input type="username" v-model="newSessionParams.username" />
+      <div class="mb-3">
+        <label class="form-label">Username:</label>
+        <input type="username" class="form-control" v-model="newSessionParams.username" />
       </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="newSessionParams.password" />
+      <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input type="password" class="form-control" v-model="newSessionParams.password" />
       </div>
-      <input type="submit" value="Submit" />
+      <input class="btn btn-primary mb-3" type="submit" value="Submit" />
     </form>
   </div>
 </template>

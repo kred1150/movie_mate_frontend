@@ -46,8 +46,7 @@ export default {
 
 <template>
   <div class="search_bar">
-    Search for a Movie:
-    <input v-model="titleFilter" type="text" list="titles" />
+    <input v-model="titleFilter" type="text" list="titles" placeholder="Search Movie" />
     <datalist id="titles">
       <option v-for="movie in sortedMovies()" v-bind:key="movie.id">
         {{ movie.title }}
@@ -63,6 +62,10 @@ export default {
           <h5 v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
           <p :class="`${getRatingZone(movie.vote_average)}`">{{ movie.vote_average }}</p>
         </div>
+        <div class="overview">
+          <h4>{{ movie.title }}</h4>
+          <p>{{ movie.overview }}</p>
+        </div>
       </div>
     </TransitionGroup>
   </div>
@@ -72,12 +75,33 @@ export default {
 .index {
   display: flex;
   flex-wrap: wrap;
+  background-color: transparent;
+}
+
+.search_bar {
+  display: flex;
+  justify-content: flex-start;
+  position: static;
+}
+
+.search_bar input {
+  background-color: lightskyblue;
+  border: 5px solid slategrey;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.search_bar:focus {
+  background-color: navy;
+  outline: navy;
 }
 .card {
   box-shadow: 0 4px 5px rgba(0, 0, 128, 0.2);
   width: 18rem;
   display: flex;
   margin: 1rem;
+  position: relative;
 }
 
 .card img {
@@ -118,8 +142,22 @@ export default {
   color: red;
 }
 
-.search_bar {
-  margin: 2rem;
+.overview {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  color: transparent;
+  padding: 2rem;
+  transform: translateY(100%);
+  transition-delay: 0.6s;
+}
+
+.card:hover .overview {
+  transform: translateY(0%);
+  background-color: ivory;
+  color: black;
 }
 
 .list-enter-active,
