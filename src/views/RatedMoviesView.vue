@@ -78,6 +78,7 @@ export default {
   color: black;
   font-weight: bold;
   text-shadow: 2px 2px 5px slategrey;
+  height: 3rem;
 }
 
 .rated-body p {
@@ -98,6 +99,8 @@ export default {
 
 .rated-text {
   opacity: 0.8;
+  overflow-y: auto;
+  height: 7rem;
 }
 
 .rated-text:hover {

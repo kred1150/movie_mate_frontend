@@ -96,8 +96,11 @@ body {
 
 nav {
   position: fixed;
+  display: flex;
+  align-items: center;
   padding: 5rem;
   margin: 1rem;
+  border-radius: 3px;
 }
 .index {
   display: flex;
@@ -105,7 +108,7 @@ nav {
   background-color: transparent;
 }
 .card {
-  box-shadow: 0 4px 5px rgba(0, 0, 128, 0.2);
+  box-shadow: 4px 4px 7px rgba(0, 0, 128, 0.5);
   width: 18rem;
   display: flex;
   margin: 1rem;

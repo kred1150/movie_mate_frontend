@@ -49,8 +49,8 @@ export default {
       axios.post("/rated_movies", this.newScoreParams).then((response) => {
         console.log(response, "Movie Rated!");
         localStorage.setItem("flashMessage", "Thank you for Rating!");
-        this.$router.push("/movies");
       });
+      this.$router.push({ path: "/" });
     },
     isMovieStreaming: function () {
       if (this.stream && this.stream["flatrate"] && this.stream["flatrate"].length > 0) {
@@ -111,24 +111,26 @@ export default {
     </div>
   </div>
 
-  <h3>Watch the Trailers</h3>
-  <div v-if="trailers.length > 0">
-    <div class="trailer-container">
-      <div class="trailer" v-for="trailer in trailers" v-bind:key="trailer.id">
-        <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
-        <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
-          <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
-        </video>
+  <div class="bottom">
+    <h3>Top Billed Cast</h3>
+    <div class="cast-container">
+      <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
+        <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
+        <div class="cast-info">
+          <h4>{{ actor["character"] }}</h4>
+          <h5>{{ actor["name"] }}</h5>
+        </div>
       </div>
     </div>
-  </div>
-  <h3>Top Billed Cast</h3>
-  <div class="cast-container">
-    <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
-      <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
-      <div class="cast-info">
-        <h4>{{ actor["character"] }}</h4>
-        <h5>{{ actor["name"] }}</h5>
+    <h3>Watch the Trailers</h3>
+    <div v-if="trailers.length > 0">
+      <div class="trailer-container">
+        <div class="trailer" v-for="trailer in trailers" v-bind:key="trailer.id">
+          <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
+          <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
+            <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
+          </video>
+        </div>
       </div>
     </div>
   </div>
@@ -222,7 +224,8 @@ export default {
 .cast-container {
   white-space: nowrap;
   margin: 3rem;
-  width: 50%;
+  left: 33%;
+  width: 66%;
   background-color: lightsteelblue;
   box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
   overflow-x: auto;
@@ -293,5 +296,15 @@ export default {
   left: 0;
   object-fit: contain;
   display: inline;
+}
+
+.bottom {
+  background-color: darkslategrey;
+  left: 0;
+  right: 0;
+  color: gainsboro;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
 }
 </style>

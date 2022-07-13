@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-  <h1>{{ user.username.toUpperCase() }}'s Page</h1>
+  <h1>{{ user.username }}'s Page</h1>
 
   <div class="index">
     <div class="card" v-for="movie in rated_movies" :key="movie.id">
@@ -55,7 +55,7 @@ export default {
       </div>
       <div class="rated-text">
         <p :class="`${getRatingZone(movie['rating'])}`" v-on:click="showUser(movie)">
-          {{ user["username"].toUpperCase() }}'s Review: {{ movie["message"] }}
+          {{ user["username"] }}'s Review: {{ movie["message"] }}
         </p>
       </div>
     </div>
