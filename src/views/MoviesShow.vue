@@ -111,12 +111,15 @@ export default {
     </div>
   </div>
 
+  <h3>Watch the Trailers</h3>
   <div v-if="trailers.length > 0">
-    <div v-for="trailer in trailers" v-bind:key="trailer.id">
-      <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
-      <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
-        <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
-      </video>
+    <div class="trailer-container">
+      <div class="trailer" v-for="trailer in trailers" v-bind:key="trailer.id">
+        <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
+        <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
+          <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
+        </video>
+      </div>
     </div>
   </div>
   <h3>Top Billed Cast</h3>
@@ -267,5 +270,28 @@ export default {
   transform: translateY(0%);
   background-color: ivory;
   color: black;
+}
+
+.trailer-container {
+  white-space: nowrap;
+  margin: 3rem;
+  background-color: lightsteelblue;
+  box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+}
+
+.trailer {
+  display: inline-block;
+  scroll-padding-left: 2.5rem;
+  margin-right: 5rem;
+  text-align: center;
+}
+
+.trailer video {
+  left: 0;
+  object-fit: contain;
+  display: inline;
 }
 </style>

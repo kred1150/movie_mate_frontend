@@ -90,6 +90,10 @@ export default {
 </template>
 
 <style>
+body {
+  font-family: "Poppins", "Roboto", "Gill Sans";
+}
+
 nav {
   position: fixed;
   padding: 5rem;
