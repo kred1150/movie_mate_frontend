@@ -18,6 +18,7 @@ export default {
       cast: [],
       videos: [],
       trailers: [],
+      background_image: {},
     };
   },
   created: function () {
@@ -37,6 +38,7 @@ export default {
         this.stream = response.data["stream"];
         this.cast = response.data["cast"];
         this.videos = response.data["videos"];
+        this.background_image = response.data["background_image"];
         this.isMovieStreaming();
         this.getTrailers();
       });
@@ -75,17 +77,13 @@ export default {
 
 <template>
   <div class="row">
-    <div class="col">
+    <img class="background" :src="`https://image.tmdb.org/t/p/w1280${background_image.file_path}`" alt="" />
+    <div class="col-md-4">
       <div class="movie-poster">
         <img :src="movie.poster_path" alt="" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="movie-info">
-        <h3 class="title">{{ movie.title }}</h3>
-        <h5 class="score">Viewer Score: {{ movie.vote_average }} Release Date: {{ movie.release_date }}</h5>
-        <p class="about">{{ movie.overview }}</p>
-
+        <div class="stream" v-if="streaming === true">
+          <p>Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}</p>
+        </div>
         <button
           v-if="isLoggedIn"
           type="button"
@@ -95,12 +93,16 @@ export default {
         >
           Rate {{ movie.title }}
         </button>
-
-        <div class="stream" v-if="streaming === true">
-          <p>
-            Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}
-            <img :src="`https://image.tmdb.org/t/p/w1280${stream.flatrate[0].logo_path}`" alt="" />
-          </p>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="movie-info">
+        <h3 class="title">{{ movie.title }}</h3>
+        <h5 class="score">Viewer Score: {{ movie.vote_average }}</h5>
+        <h5 class="release">Release Date: {{ movie.release_date }}</h5>
+        <p class="about">{{ movie.overview }}</p>
+        <div class="stream-image" v-if="streaming === true">
+          <img :src="`https://image.tmdb.org/t/p/w1280${stream.flatrate[0].logo_path}`" alt="" />
         </div>
         <div class="no-stream" v-if="streaming === false">
           <p>Unfortunately {{ movie.title }} is not currently streamable.</p>
@@ -154,33 +156,71 @@ export default {
 </template>
 
 <style>
+.row {
+  margin: 0;
+  height: 50rem;
+}
+.background {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  opacity: 0.8;
+  height: 50rem;
+  object-fit: cover;
+}
 .movie-poster {
-  width: 20rem;
+  padding: 3rem;
+  margin: 3rem;
 }
 .movie-poster img {
+  display: flex;
   height: 30rem;
   width: 20rem;
   border: black;
   border-width: 3rem;
+  border-top-left-radius: 7.5px;
+  border-top-right-radius: 7.5px;
   box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
 }
 
-.movie-info {
-  align-items: right;
-  justify-content: right;
-  float: right;
-  align: right;
+.movie-poster button {
+  margin-top: 1rem;
+  opacity: 1;
+  width: 20rem;
 }
 
-.stream img {
-  max-height: 2rem;
-  max-width: 2rem;
+.movie-info {
+  padding: 3rem;
+  margin: 3rem;
+  margin-top: 6rem;
+  background-color: ivory;
+  opacity: 0.7;
+  border: black;
+  border-width: 3rem;
+  border-radius: 7.5px;
+  box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
+}
+
+.stream {
+  background-color: darkslategrey;
+  opacity: 0.7;
+  width: 20rem;
+  color: ivory;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+}
+.stream-image img {
+  max-height: 4rem;
+  max-width: 4rem;
 }
 
 .cast-container {
   white-space: nowrap;
   margin: 3rem;
   width: 50%;
+  background-color: lightsteelblue;
   box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
   overflow-x: auto;
   overflow-y: hidden;
