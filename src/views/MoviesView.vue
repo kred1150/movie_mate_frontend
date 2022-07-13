@@ -45,6 +45,7 @@ export default {
 </script>
 
 <template>
+  <h3>All Movies</h3>
   <div class="search_bar">
     <input v-model="titleFilter" type="text" list="titles" placeholder="Search Movie" />
     <datalist id="titles">

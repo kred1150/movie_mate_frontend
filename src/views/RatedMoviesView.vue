@@ -42,6 +42,7 @@ export default {
 </script>
 
 <template>
+  <h3>Your Friends Review's</h3>
   <div class="index">
     <div class="card" v-for="movie in rated_movies" :key="movie.id">
       <img v-bind:src="movie['movie']['poster_path']" class="card-img-top" v-on:click="showMoreInfo(movie)" />
@@ -125,4 +126,5 @@ export default {
 .rated-text p {
   background-color: indianred;
 }
+
 </style>
