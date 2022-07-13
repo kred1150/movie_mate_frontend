@@ -24,6 +24,15 @@ export default {
       this.current_movie = movie;
       this.$router.push("/movies/" + this.current_movie.id);
     },
+    getRatingZone: function (score) {
+      if (score >= 8.0) {
+        return "green";
+      } else if (score >= 6.5) {
+        return "yellow";
+      } else {
+        return "red";
+      }
+    },
   },
 };
 </script>
@@ -34,36 +43,19 @@ export default {
   <div class="index">
     <div class="card" v-for="movie in rated_movies" :key="movie.id">
       <img v-bind:src="movie['poster_path']" class="card-img-top" v-on:click="showMoreInfo(movie)" />
-      <div class="card-body">
-        <h5 class="card-title">{{ movie["title"] }}</h5>
-        <p class="card-text" v-on:click="showUser(movie)">{{ user["username"] }}'s Score: {{ movie["rating"] }}</p>
-        <p class="card-text" v-on:click="showUser(movie)">{{ user["username"] }}'s Review: {{ movie["message"] }}</p>
+      <div class="rated-body">
+        <h5 class="rated-title">{{ movie["title"] }}</h5>
+        <p :class="`${getRatingZone(movie['rating'])}`" v-on:click="showUser(movie)">
+          {{ movie["rating"] }}
+        </p>
+      </div>
+      <div class="rated-text">
+        <p :class="`${getRatingZone(movie['rating'])}`" v-on:click="showUser(movie)">
+          Your Review: {{ movie["message"] }}
+        </p>
       </div>
     </div>
   </div>
 </template>
 
-<style>
-.profile-card-body {
-  background-color: lightskyblue;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem 1rem;
-  letter-spacing: 1px;
-  align-items: center;
-}
-
-.profile-card-body title {
-  margin: 0;
-  color: black;
-  font-weight: bold;
-  text-shadow: 2px 2px 5px slategrey;
-}
-.profile-card-body text {
-  background-color: midnightblue;
-  color: dimgray;
-  border-radius: 3px;
-  padding: 0.25rem 0.5rem;
-  align-items: center;
-}
-</style>
+<style></style>

@@ -74,7 +74,6 @@ export default {
 
 .rated-title {
   text-align: center;
-  padding-bottom: 0.25rem;
   outline: black 3px;
   color: black;
   font-weight: bold;
