@@ -74,42 +74,58 @@ export default {
 </script>
 
 <template>
-  <img class="show_poster" :src="movie.poster_path" alt="" />
-  <!-- <a :href="`https://www.themoviedb.org/video/play?key=${trailers[0].key}`"></a> -->
+  <div class="row">
+    <div class="col">
+      <div class="movie-poster">
+        <img :src="movie.poster_path" alt="" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="movie-info">
+        <h3 class="title">{{ movie.title }}</h3>
+        <h5 class="score">Viewer Score: {{ movie.vote_average }} Release Date: {{ movie.release_date }}</h5>
+        <p class="about">{{ movie.overview }}</p>
+
+        <button
+          v-if="isLoggedIn"
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Rate {{ movie.title }}
+        </button>
+
+        <div class="stream" v-if="streaming === true">
+          <p>
+            Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}
+            <img :src="`https://image.tmdb.org/t/p/w1280${stream.flatrate[0].logo_path}`" alt="" />
+          </p>
+        </div>
+        <div class="no-stream" v-if="streaming === false">
+          <p>Unfortunately {{ movie.title }} is not currently streamable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div v-if="trailers.length > 0">
     <div v-for="trailer in trailers" v-bind:key="trailer.id">
       <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
       <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
         <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
       </video>
-      <!-- <video crossOrigin="anonymous">
-   <source src="domain1Url"> ... </source>
-   <track kind="captions" label="English Captions" src="domain2Url" srclang="en" default>
-</video> -->
     </div>
   </div>
-  <h3>{{ movie.title }}</h3>
-  <h5>Viewer Score: {{ movie.vote_average }} Release Date: {{ movie.release_date }}</h5>
-  <p>{{ movie.overview }}</p>
-
-  <button v-if="isLoggedIn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Rate {{ movie.title }}
-  </button>
-
-  <div class="stream" v-if="streaming === true">
-    <p>
-      Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}
-      <img :src="`https://image.tmdb.org/t/p/w1280${stream.flatrate[0].logo_path}`" alt="" />
-    </p>
-  </div>
-  <div v-if="streaming === false">
-    <p>Unfortunately {{ movie.title }} is not currently streamable.</p>
-  </div>
-
-  <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
-    <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
-    <h4>{{ actor["character"] }}</h4>
-    <h5>{{ actor["name"] }}</h5>
+  <h3>Top Billed Cast</h3>
+  <div class="cast-container">
+    <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
+      <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
+      <div class="cast-info">
+        <h4>{{ actor["character"] }}</h4>
+        <h5>{{ actor["name"] }}</h5>
+      </div>
+    </div>
   </div>
 
   <!-- Modal -->
@@ -138,15 +154,78 @@ export default {
 </template>
 
 <style>
-.show_poster {
-  align: left;
+.movie-poster {
+  width: 20rem;
+}
+.movie-poster img {
   height: 30rem;
   width: 20rem;
   border: black;
   border-width: 3rem;
+  box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
 }
+
+.movie-info {
+  align-items: right;
+  justify-content: right;
+  float: right;
+  align: right;
+}
+
 .stream img {
   max-height: 2rem;
   max-width: 2rem;
+}
+
+.cast-container {
+  white-space: nowrap;
+  margin: 3rem;
+  width: 50%;
+  box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+}
+
+.cast {
+  box-shadow: 0 4px 5px rgba(0, 0, 128, 0.2);
+  outline: 5px;
+  display: inline-block;
+  position: relative;
+  scroll-padding-left: 2.5rem;
+  margin-left: 5rem;
+  width: 7.5rem;
+}
+
+.cast img {
+  scroll-snap-align: start;
+  height: 12rem;
+  width: 100%;
+  object-fit: contain;
+  display: inline;
+}
+
+.cast-info {
+  scroll-snap-align: start;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+  color: transparent;
+  transform: translateY(100%);
+  transition-delay: 0.6s;
+  word-wrap: break-word;
+}
+
+.cast-info h4 {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.cast:hover .cast-info {
+  transform: translateY(0%);
+  background-color: ivory;
+  color: black;
 }
 </style>
