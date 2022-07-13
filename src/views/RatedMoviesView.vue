@@ -96,6 +96,14 @@ export default {
   color: red;
 }
 
+.rated-text {
+  opacity: 0.8;
+}
+
+.rated-text:hover {
+  opacity: 1;
+}
+
 .rated-text p {
   color: black;
   font-weight: bold;
