@@ -6,12 +6,25 @@ export default {
     return {
       rated_movies: [],
       current_movie: {},
+      isLoggedIn: false,
     };
   },
   created: function () {
+    this.userLoggedIn();
+    this.routeIfNotLoggedIn();
     this.indexRatedMovies();
   },
   methods: {
+    userLoggedIn: function () {
+      if (localStorage.getItem("jwt") !== null) {
+        this.isLoggedIn = true;
+      }
+    },
+    routeIfNotLoggedIn: function () {
+      if (this.isLoggedIn === false) {
+        this.$router.push("/movies");
+      }
+    },
     indexRatedMovies: function () {
       axios.get("/rated_movies.json").then((response) => {
         console.log("Index Movies", response);
@@ -126,5 +139,4 @@ export default {
 .rated-text p {
   background-color: indianred;
 }
-
 </style>
