@@ -127,9 +127,9 @@ export default {
       <div class="trailer-container">
         <div class="trailer" v-for="trailer in trailers" v-bind:key="trailer.id">
           <a :href="`https://www.themoviedb.org/video/play?key=${trailer.key}`">{{ movie.title }} {{ trailer.name }}</a>
-          <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
+          <!-- <video crossOrigin="anonymous" :key="`https://www.themoviedb.org/video/play?key=${trailer.key}`" controls>
             <source :src="`https://www.themoviedb.org/video/play?key=${trailer.key}`" type="video/mp4" />
-          </video>
+          </video> -->
         </div>
       </div>
     </div>
