@@ -12,7 +12,8 @@ new Darkmode().showWidget();
 
 // Vue.use(Embed);
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://serene-dusk-88140.herokuapp.com";
 
 createApp(App).use(router).mount("#app");
 

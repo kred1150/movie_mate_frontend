@@ -28,9 +28,9 @@ export default {
         return movie.title.toLowerCase().includes(this.titleFilter.toLowerCase());
       });
     },
-    sortedMovies: function () {
-      return this.movies.sort((a, b) => (a.last_nom > b.last_nom ? 1 : b.last_nom > a.last_nom ? -1 : 0));
-    },
+    // sortedMovies: function () {
+    //   return this.movies.sort((a, b) => (a.last_nom > b.last_nom ? 1 : b.last_nom > a.last_nom ? -1 : 0));
+    // },
     getRatingZone: function (score) {
       if (score >= 7.5) {
         return "green";
