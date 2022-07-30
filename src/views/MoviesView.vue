@@ -57,7 +57,7 @@ export default {
 
   <div class="index">
     <TransitionGroup name="list">
-      <div class="card" v-for="movie in filteredMovies()" :key="movie.id">
+      <div class="card" v-for="movie in movies" :key="movie.id">
         <img v-bind:src="movie.poster_path" class="card-img-top" v-on:click="showMoreInfo(movie)" />
         <div class="card-body">
           <h5 v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5>
