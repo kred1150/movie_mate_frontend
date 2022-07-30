@@ -49,7 +49,7 @@ export default {
   <div class="search_bar">
     <input v-model="titleFilter" type="text" list="titles" placeholder="Search Movie" />
     <datalist id="titles">
-      <option v-for="movie in sortedMovies()" v-bind:key="movie.id">
+      <option v-for="movie in movies" v-bind:key="movie.id">
         {{ movie.title }}
       </option>
     </datalist>
