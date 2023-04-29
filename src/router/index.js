@@ -7,6 +7,7 @@ import RatedMoviesIndex from "../views/RatedMoviesView.vue";
 import LogoutView from "../views/LogoutView.vue";
 import UsersShow from "../views/UsersShow.vue";
 import CurrentUserShow from "../views/CurrentUserView.vue";
+import ActorsShow from "../views/ActorsShow.vue";
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: "/profile",
     name: "current_user-show",
     component: CurrentUserShow,
+  },
+  {
+    path: "/actors/:id",
+    name: "actors-show",
+    component: ActorsShow,
   },
 ];
 

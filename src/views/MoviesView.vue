@@ -75,7 +75,7 @@ export default {
 <style scoped>
 .search_bar {
   justify-content: flex-start;
-  padding: 10px;
+  padding: 25px;
   position: sticky;
   top: 2rem;
   z-index: 2;
