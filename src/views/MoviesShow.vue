@@ -19,6 +19,7 @@ export default {
       videos: [],
       trailers: [],
       background_image: {},
+      actor: [],
     };
   },
   created: function () {
@@ -27,6 +28,7 @@ export default {
   },
   computed: {
     topBilledCast: function () {
+      console.log("Cast", this.cast);
       return this.cast.slice(0, 10);
     },
   },
@@ -70,6 +72,10 @@ export default {
       }
       console.log("Filtered Trailers:", trailers, trailers[0].key);
       this.trailers = trailers;
+    },
+    showActor: function (actor) {
+      this.current_actor = actor;
+      this.$router.push("/actors/" + this.current_actor.id);
     },
   },
 };
@@ -118,7 +124,7 @@ export default {
         <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
         <div class="cast-info">
           <h4>{{ actor["character"] }}</h4>
-          <h5>{{ actor["name"] }}</h5>
+          <h5 v-on:click="showActor(actor)">{{ actor["name"] }}</h5>
         </div>
       </div>
     </div>
