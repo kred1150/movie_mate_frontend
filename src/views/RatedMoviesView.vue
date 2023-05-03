@@ -34,7 +34,7 @@ export default {
     showMoreInfo: function (movie) {
       this.current_movie = movie;
       console.log("Movie ID:", movie);
-      this.$router.push("/movies/" + movie["movie"]["external_id"]);
+      this.$router.push("/users/" + movie["user"]["user_id"]);
     },
     showUser: function (movie) {
       this.current_movie = movie;
