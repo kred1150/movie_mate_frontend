@@ -21,7 +21,7 @@ export default {
     },
     showMoreInfo: function (movie) {
       this.current_movie = movie;
-      this.$router.push("/movies/" + this.current_movie.id);
+      this.$router.push("/movies/" + this.current_movie.external_id);
     },
     filteredMovies: function () {
       return this.movies.filter((movie) => {
