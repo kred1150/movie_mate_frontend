@@ -17,6 +17,11 @@ export default {
     this.isLoggedIn = localStorage.user_id;
     this.showActor();
   },
+  computed: {
+    topActedMovies: function () {
+      return this.cinemetography.slice(0, 20);
+    },
+  },
   methods: {
     showActor: function () {
       axios.get("/actors/" + this.$route.params.id).then((response) => {
@@ -30,6 +35,10 @@ export default {
         this.cinemetography = response.data["cinemetography"];
       });
     },
+    showMoreInfo: function (movie) {
+      this.current_movie = movie;
+      this.$router.push("/movies/" + this.current_movie.id);
+    },
   },
 };
 </script>
@@ -41,12 +50,40 @@ export default {
     <p>{{ bio }}</p>
   </div>
 
-  <div class="bottom">
+  <div class="known-for">
     <h3>Cinemetography</h3>
-    <div class="movies-container">
-      <p>{{ cinemetography }}</p>
+    <div class="index">
+      <TransitionGroup name="list">
+        <div class="card" v-for="movie in topActedMovies" :key="movie.id">
+          <img
+            v-bind:src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`"
+            class="card-img-top"
+          />
+          <!-- v-on:click="showMoreInfo(movie)"
+          /> -->
+          <div class="card-body">
+            <!-- <h5 v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5> -->
+            <!-- <p :class="`${getRatingZone(movie.vote_average)}`">{{ movie.vote_average }}</p> -->
+            <h4>{{ movie.title }}</h4>
+            <p>{{ movie.character }}</p>
+          </div>
+          <div class="overview">
+            <h4>{{ movie.title }}</h4>
+            <p>{{ movie.overview }}</p>
+          </div>
+        </div>
+      </TransitionGroup>
     </div>
   </div>
+  <!-- 
+    <div class="movies-container">
+      <div class="card" v-for="movie in topActedMovies" v-bind:key="movie.id">
+        {{ movie["title"] }}
+        {{ movie["character"] }}
+      </div>
+      <p>{{ cinemetography }}</p>
+    </div>
+  </div> -->
 </template>
 
 <style></style>
