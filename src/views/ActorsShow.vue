@@ -13,10 +13,10 @@ export default {
       cinemetography: [],
     };
   },
-  // created: function () {
-  //   this.isLoggedIn = localStorage.user_id;
-  //   this.showMovie();
-  // },
+  created: function () {
+    this.isLoggedIn = localStorage.user_id;
+    this.showActor();
+  },
   methods: {
     showActor: function () {
       axios.get("/actors/" + this.$route.params.id).then((response) => {
@@ -36,7 +36,16 @@ export default {
 
 <template>
   <div class="home">
-    <h1>Actor: {{ this.name }}</h1>
+    <h1>Actor: {{ name }}</h1>
+    <img class="profile_pic" :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${profile_path}`" alt="" />
+    <p>{{ bio }}</p>
+  </div>
+
+  <div class="bottom">
+    <h3>Cinemetography</h3>
+    <div class="movies-container">
+      <p>{{ cinemetography }}</p>
+    </div>
   </div>
 </template>
 
