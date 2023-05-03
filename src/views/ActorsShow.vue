@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     topActedMovies: function () {
-      return this.cinemetography.slice(0, 20);
+      return this.cinemetography;
     },
   },
   methods: {
@@ -38,6 +38,15 @@ export default {
     showMoreInfo: function (movie) {
       this.current_movie = movie;
       this.$router.push("/movies/" + this.current_movie.id);
+    },
+    getRatingZone: function (score) {
+      if (score >= 7.5) {
+        return "green";
+      } else if (score >= 6.0) {
+        return "yellow";
+      } else {
+        return "red";
+      }
     },
   },
 };
@@ -65,10 +74,10 @@ export default {
             <!-- <h5 v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5> -->
             <!-- <p :class="`${getRatingZone(movie.vote_average)}`">{{ movie.vote_average }}</p> -->
             <h4>{{ movie.title }}</h4>
-            <p>{{ movie.character }}</p>
+            <p :class="`${getRatingZone(movie.vote_average)}`">{{ movie.vote_average.toFixed(1) }}</p>
           </div>
           <div class="overview">
-            <h4>{{ movie.title }}</h4>
+            <h4>{{ movie.character }}</h4>
             <p>{{ movie.overview }}</p>
           </div>
         </div>
@@ -86,4 +95,55 @@ export default {
   </div> -->
 </template>
 
-<style></style>
+<style>
+.card-body h5 {
+  margin: 0;
+  color: black;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px slategrey;
+}
+.card-body p {
+  background-color: midnightblue;
+  color: dimgray;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+}
+.card-body p.green {
+  color: lime;
+}
+.card-body p.yellow {
+  color: yellow;
+}
+.card-body p {
+  color: red;
+}
+
+.overview {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  color: transparent;
+  padding: 2rem;
+  transform: translateY(100%);
+  transition-delay: 0.6s;
+}
+
+.card:hover .overview {
+  transform: translateY(0%);
+  background-color: ivory;
+  color: black;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.2s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>
