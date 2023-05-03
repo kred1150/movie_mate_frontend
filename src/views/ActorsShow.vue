@@ -65,11 +65,10 @@ export default {
       <TransitionGroup name="list">
         <div class="card" v-for="movie in topActedMovies" :key="movie.id">
           <img
+            v-on:click="showMoreInfo(movie)"
             v-bind:src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`"
             class="card-img-top"
           />
-          <!-- v-on:click="showMoreInfo(movie)"
-          /> -->
           <div class="card-body">
             <!-- <h5 v-on:click="showMoreInfo(movie)">{{ movie.title }}</h5> -->
             <!-- <p :class="`${getRatingZone(movie.vote_average)}`">{{ movie.vote_average }}</p> -->
