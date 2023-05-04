@@ -53,8 +53,8 @@ export default {
 </script>
 
 <template>
-  <div class="home">
-    <h1>Actor: {{ name }}</h1>
+  <div class="heading">
+    <h1>{{ name }}</h1>
     <img class="profile_pic" :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${profile_path}`" alt="" />
     <p>{{ bio }}</p>
   </div>
@@ -83,15 +83,6 @@ export default {
       </TransitionGroup>
     </div>
   </div>
-  <!-- 
-    <div class="movies-container">
-      <div class="card" v-for="movie in topActedMovies" v-bind:key="movie.id">
-        {{ movie["title"] }}
-        {{ movie["character"] }}
-      </div>
-      <p>{{ cinemetography }}</p>
-    </div>
-  </div> -->
 </template>
 
 <style>
@@ -144,5 +135,13 @@ export default {
 .list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+.profile_pic {
+  float: left;
+  margin-right: 25px;
+}
+.heading h1 {
+  text-align: center;
+  padding-bottom: 2rem;
 }
 </style>
