@@ -143,5 +143,10 @@ export default {
 .heading h1 {
   text-align: center;
   padding-bottom: 2rem;
+  overflow: hidden;
+}
+.known-for {
+  clear: both;
+  padding-top: 2rem;
 }
 </style>
