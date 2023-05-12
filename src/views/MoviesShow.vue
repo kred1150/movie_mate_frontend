@@ -86,7 +86,7 @@ export default {
     <img class="background" :src="`https://image.tmdb.org/t/p/w1280${background_image.file_path}`" alt="" />
     <div class="col-md-4">
       <div class="movie-poster">
-        <img :src="movie.poster_path" alt="" />
+        <img :src="`https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`" alt="" />
         <div class="stream" v-if="streaming === true">
           <p>Stream {{ movie.title }} now on {{ stream.flatrate[0]["provider_name"] }}</p>
         </div>
