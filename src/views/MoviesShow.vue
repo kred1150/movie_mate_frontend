@@ -52,7 +52,7 @@ export default {
         console.log(response, "Movie Rated!");
         localStorage.setItem("flashMessage", "Thank you for Rating!");
       });
-      this.$router.push({ path: "/" });
+      this.$router.push("/");
     },
     isMovieStreaming: function () {
       if (this.stream && this.stream["flatrate"] && this.stream["flatrate"].length > 0) {
@@ -128,7 +128,7 @@ export default {
         </div>
       </div>
     </div>
-    <h3>Watch the Trailers</h3>
+    <h3>Click on the Links to Watch the Trailers</h3>
     <div v-if="trailers.length > 0">
       <div class="trailer-container">
         <div class="trailer" v-for="trailer in trailers" v-bind:key="trailer.id">
@@ -230,9 +230,7 @@ export default {
 .cast-container {
   white-space: nowrap;
   margin: 3rem;
-  left: 33%;
-  width: 66%;
-  background-color: lightsteelblue;
+  width: 100%;
   box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
   overflow-x: auto;
   overflow-y: hidden;
@@ -261,18 +259,19 @@ export default {
   scroll-snap-align: start;
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
-  width: 100%;
   background-color: transparent;
   color: transparent;
   transform: translateY(100%);
-  transition-delay: 0.6s;
+  transition-delay: 0.3s;
   word-wrap: break-word;
 }
 
 .cast-info h4 {
   font-size: 100%;
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 .cast:hover .cast-info {
@@ -284,11 +283,9 @@ export default {
 .trailer-container {
   white-space: nowrap;
   margin: 3rem;
-  background-color: lightsteelblue;
-  box-shadow: 0 7px 9px rgba(0, 0, 128, 0.2);
-  overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x proximity;
+  box-sizing: border-box;
+  color: ivory;
 }
 
 .trailer {
@@ -305,10 +302,9 @@ export default {
 }
 
 .bottom {
-  background-color: darkslategrey;
   left: 0;
   right: 0;
-  color: gainsboro;
+  color: dodgerblue;
   border-radius: 5px;
   margin: 1rem;
   padding: 1rem;
