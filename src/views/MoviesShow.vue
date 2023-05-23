@@ -121,10 +121,10 @@ export default {
     <h3>Top Billed Cast</h3>
     <div class="cast-container">
       <div class="cast" v-for="actor in topBilledCast" v-bind:key="actor.id">
-        <img :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
+        <img v-on:click="showActor(actor)" :src="`https://image.tmdb.org/t/p/w1280${actor.profile_path}`" alt="" />
         <div class="cast-info">
-          <h4>{{ actor["character"] }}</h4>
           <h5 v-on:click="showActor(actor)">{{ actor["name"] }}</h5>
+          <h4>{{ actor["character"] }}</h4>
         </div>
       </div>
     </div>
@@ -243,13 +243,13 @@ export default {
   display: inline-block;
   position: relative;
   scroll-padding-left: 2.5rem;
-  margin-left: 5rem;
-  width: 7.5rem;
+  margin-left: 1rem;
+  word-wrap: break-word;
 }
 
 .cast img {
   scroll-snap-align: start;
-  height: 12rem;
+  height: 15rem;
   width: 100%;
   object-fit: contain;
   display: inline;
@@ -257,14 +257,14 @@ export default {
 
 .cast-info {
   scroll-snap-align: start;
-  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: transparent;
-  color: transparent;
-  transform: translateY(100%);
-  transition-delay: 0.3s;
+  word-wrap: break-word;
+}
+
+.cast-info h5 {
+  font-weight: bold;
   word-wrap: break-word;
 }
 
@@ -274,7 +274,7 @@ export default {
   word-wrap: break-word;
 }
 
-.cast:hover .cast-info {
+.cast:hover .cast-info h5 {
   transform: translateY(0%);
   background-color: ivory;
   color: black;
